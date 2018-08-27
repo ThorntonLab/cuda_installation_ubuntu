@@ -1,3 +1,5 @@
+# Installing pre-built tensor flow with GPU support
+
 Key:
 
 ```
@@ -77,4 +79,30 @@ c = tf.matmul(a, b)
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 # Runs the op.
 print(sess.run(c))
+```
+
+# Installing from source
+
+**not working yet** The configure step is failing b/c I am missing a library
+
+Following recipe from [here](https://www.tensorflow.org/install/install_sources):
+
+Install bazel:
+```
+sudo apt-get -f install openjdk-8-jdk
+echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -f install bazel
+```
+
+```
+git clone https://github.com/tensorflow/tensorflow
+cd tensorflow
+# Check out latest release
+git checkout r1.10
+wget https://github.com/bazelbuild/bazel/releases/download/0.16.1/bazel-0.16.1-installer-darwin-x86_64.sh
+chmod +x bazel-0.16.1-installer-darwin-x86_64.sh 
+sudo ./bazel-0.16.1-installer-darwin-x86_64.sh
+
 ```
